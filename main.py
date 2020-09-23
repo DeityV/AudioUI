@@ -9,6 +9,11 @@ from kivy.clock import Clock
 from threading import Thread
 import audioop
 import pyaudio
+from kivy.core.text import LabelBase
+from kivy.core.window import Window
+Window.clearcolor = (1, 1, 1, 1)
+from kivy.uix.behaviors import ToggleButtonBehavior
+from kivy.uix.image import Image
 
 def get_microphone_level():
     """
@@ -35,10 +40,11 @@ def get_microphone_level():
         levels.append(mx)
 
 
-class Logic(BoxLayout):
+class Logic(BoxLayout, ToggleButtonBehavior, Image):
     def __init__(self, **kwargs): 
         super(Logic, self).__init__(**kwargs)
         self.plot = MeshLinePlot(color=[1, 0, 0, 1])
+        self.source = 'atlas://data/images/defaulttheme/checkbox_off'
 
     def start(self):
         self.ids.graph.add_plot(self.plot)
@@ -49,6 +55,13 @@ class Logic(BoxLayout):
 
     def get_value(self, dt):
         self.plot.points = [(i, j/5) for i, j in enumerate(levels)]
+        
+
+    def on_state(self, widget, value):
+        if value == 'down':
+            self.source = 'atlas://data/images/defaulttheme/checkbox_on'
+        else:
+            self.source = 'atlas://data/images/defaulttheme/checkbox_off'
 
 
 class RealTimeMicrophone(App):
@@ -60,5 +73,6 @@ if __name__ == "__main__":
     get_level_thread = Thread(target = get_microphone_level)
     get_level_thread.daemon = True
     get_level_thread.start()
+    LabelBase.register('Modern Pictograms', fn_regular='modernpics.ttf')
     RealTimeMicrophone().run()
     
