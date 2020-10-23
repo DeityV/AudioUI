@@ -17,32 +17,78 @@
     
 Logic:
     background_color: C('#e8ebee')
+
+    
     BoxLayout:
-        orientation: "horizontal"
         
+   
 
         BoxLayout:
             orientation: "vertical"
-            Button:
-                text: "Test 1"
-            Button:
-                text: "Test 2"
-            Button:
-                text: "Test 3"
-            Button:
-                text: "Test 4"
+            GridLayout:
+
+                cols: 7
+                spacing: '8dp'
+                size_hint_y: None
+                height: self.minimum_height
+
+                Label:
+                    text: ''
+                Label:
+                    text: ''    
+                     
+
+                ToggleButton:
+                    size_hint_y: None
+                    height: '48dp'
+                    text: 'ECG'
+                    group: 'g1'
+
+                ToggleButton:
+                    size_hint_y: None
+                    height: '48dp'
+                    text: 'EDA'
+                    group: 'g1'
+
+                ToggleButton:
+                    size_hint_y: None
+                    height: '48dp'
+                    text: 'SpO2'
+                    group: 'g1'
+                Label:
+                    text: ''
+                Label:
+                    text: '' 
 
 
 
+                Label:
+                    text: ''
+                Label:
+                    text: ''
 
+                ToggleButton:
+                    size_hint_y: None
+                    height: '48dp'
+                    text: 'Dyspnea'
+                    group: 'g2'
 
-        BoxLayout:
-            orientation: "vertical"
+                ToggleButton:
+                    size_hint_y: None
+                    height: '48dp'
+                    text: 'Cognitive Fatigue'
+                    group: 'g3'
 
-        
+                ToggleButton:
+                    size_hint_y: None
+                    height: '48dp'
+                    text: 'Physical Fatigue'
+                    group: 'g4'
 
-                    
-
+                Label:
+                    text: ''
+                Label:
+                    text: ''
             BoxLayout:
                 size_hint: [1, .8]
                 Graph:
@@ -50,7 +96,14 @@ Logic:
                     id: graph
                     xlabel: ""
                     ylabel: "Level"
-            BoxLayout:
+            GridLayout:
+                cols: 3
+                
+                size_hint: [1, .05]
+                orientation: "vertical"
+
+                Label:
+                    text: ''
                 Slider:
                     id: slider
                     min: 0
@@ -61,35 +114,42 @@ Logic:
                 Label:
                     text: str(slider.value)
 
-            BoxLayout:
+            GridLayout:
+                cols: 7
+                spacing: '8dp'
+                size_hint_y: None
+                
                 size_hint: [1, .2]
                 orientation: "horizontal"
+
                 Button:
                     background_color: C('#3498db')
-                    text: ('[font=Modern Pictograms][size=100]''h[/size][/font]\nStart')
+                    text: ('[font=Modern Pictograms][size=100]''a[/size][/font]\nTests')
                     bold: True
                     on_press: root.start()
+                Label:
+                    text: '' 
+                Label:
+                    text: ''
+                
                 Button:
-                    background_color: C('#e74c3c')
-                    text: '[font=Modern Pictograms][size=100]X[/size][/font]\nStop'
+                    background_color: C('#ff073a')
+                    text: ('[font=Modern Pictograms][size=100]''C[/size][/font]\nRecord')
                     bold: True
-                    on_press: root.stop()
+                    on_press: root.start()
+                Label:
+                    text: '' 
+
+                Label:
+                    text: ''
+                Button:
+                    background_color: C('#f7ff00')
+                    text: ('[font=Modern Pictograms][size=100]''W[/size][/font]\nCognitive')
+                    bold: True
+                    on_press: root.start()
 
 
 
-        BoxLayout:
-            orientation: "vertical"
-            Button:
-                text: "ECG"
-            Button:
-                text: "EDA"
-            Button:
-                text: "Spo2"
-            Button:
-                text: "Dyspnea"
-            Button:
-                text: "Cognitive Fatigue"
-            Button:
-                text: "Physical Fatigue"
+            
 
 
